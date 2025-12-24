@@ -18,18 +18,40 @@ This add-in streamlines the process of sharing Dropbox files via email by:
 BridgewaterDropboxLinker/
 ├── src/
 │   ├── Bridgewater.DropboxLinker.Core/     # Core business logic (platform-agnostic)
+│   │   ├── Auth/                            # OAuth authentication & token storage
+│   │   │   ├── DropboxAuthService.cs        # OAuth 2.0 PKCE flow
+│   │   │   └── SecureTokenStorage.cs        # Windows Credential Manager integration
 │   │   ├── Contracts/                       # Interfaces and DTOs
-│   │   ├── Dropbox/                         # Dropbox folder detection and path mapping
-│   │   ├── Html/                            # HTML block generation
-│   │   ├── Logging/                         # File-based logging
+│   │   ├── Dropbox/                         # Dropbox integration
+│   │   │   ├── DropboxFolderLocator.cs      # Finds Dropbox folder from info.json
+│   │   │   ├── DropboxLinkService.cs        # Creates shared links via API
+│   │   │   └── DropboxPathMapper.cs         # Maps local paths to Dropbox paths
+│   │   ├── Html/                            # Email-safe HTML generation
+│   │   │   └── LinkBlockBuilder.cs          # Builds table-based link blocks
+│   │   ├── Logging/                         # Rolling file logger
 │   │   └── Utilities/                       # Helper utilities
+│   │       ├── ByteSizeFormatter.cs         # Human-readable file sizes
+│   │       └── FileNameCleaner.cs           # Clean display names
 │   │
 │   └── Bridgewater.DropboxLinker.Outlook/  # Outlook VSTO add-in
-│       ├── Ribbon/                          # Ribbon XML customization
-│       └── Services/                        # Outlook-specific services
+│       ├── ThisAddIn.cs                     # VSTO entry point
+│       ├── BridgewaterRibbon.cs             # Ribbon UI and file picker
+│       ├── Configuration.cs                 # Settings management
+│       ├── Ribbon/
+│       │   └── BridgewaterRibbon.xml        # Ribbon XML customization
+│       └── Services/
+│           ├── SendGuard.cs                 # Send-time validation
+│           ├── SendBlockedDialog.cs         # Failure recovery UI
+│           └── LinkConversionTracker.cs     # Tracks conversion state per email
 │
 ├── tests/
 │   └── Bridgewater.DropboxLinker.Core.Tests/
+│       ├── ByteSizeFormatterTests.cs
+│       ├── DropboxLinkServiceTests.cs
+│       ├── DropboxPathMapperTests.cs
+│       ├── FileNameCleanerTests.cs
+│       ├── LinkBlockBuilderTests.cs
+│       └── SecureTokenStorageTests.cs
 │
 ├── docs/                                    # Product documentation
 ├── settings/                                # Configuration templates
@@ -55,7 +77,7 @@ BridgewaterDropboxLinker/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-org/BridgewaterDropboxLinker.git
+git clone https://github.com/lemmieguess/BridgewaterDropboxLinker.git
 cd BridgewaterDropboxLinker
 ```
 
@@ -91,18 +113,40 @@ dotnet test
 
 ## Configuration
 
-Copy `settings/settings.example.json` to `settings/settings.json` and customize:
+### 1. Create Dropbox App
+
+1. Go to [Dropbox App Console](https://www.dropbox.com/developers/apps)
+2. Click **Create app**
+3. Choose **Scoped access** and **Full Dropbox**
+4. Name your app (e.g., "Bridgewater Dropbox Linker")
+5. Under **Permissions**, enable:
+   - `files.content.read`
+   - `sharing.write`
+6. Copy the **App key** (you'll need this)
+
+### 2. Configure the Add-in
+
+Create a settings file at `%LOCALAPPDATA%\Bridgewater\DropboxLinker\settings.json`:
 
 ```json
 {
-  "largeAttachmentThresholdBytes": 10485760,
-  "defaultExpirationDays": 7,
-  "blockLabel": "Dropbox link",
-  "primaryActionText": "Open",
-  "insertBlankLineBetweenBlocks": true,
-  "enableTaskPaneDropZone": true,
-  "debugLogPaths": false
+  "DropboxAppKey": "YOUR_APP_KEY_HERE",
+  "RootNamespaceId": null,
+  "LargeAttachmentThresholdBytes": 10485760,
+  "LinkExpirationDays": 7,
+  "DebugLogging": false
 }
+```
+
+**Note:** For Team Space accounts, you may need to set `RootNamespaceId` to your team's root namespace ID. Contact your Dropbox admin for this value.
+
+### 3. Environment Variables (Development)
+
+For development, you can use environment variables instead:
+
+```bash
+set DROPBOX_APP_KEY=your_app_key
+set DROPBOX_ROOT_NAMESPACE_ID=your_namespace_id  # Optional
 ```
 
 ## Key Features
@@ -173,17 +217,24 @@ msiexec /i BridgewaterDropboxLinker.msi /qn
 
 ## Roadmap
 
-### v0.2 (Current)
+### v0.2 (Current - Implemented)
 - ✅ Core utilities and contracts
 - ✅ Unit test coverage
-- ⏳ VSTO add-in implementation
+- ✅ OAuth 2.0 + PKCE authentication service
+- ✅ Secure token storage (Windows Credential Manager)
+- ✅ Dropbox folder locator
+- ✅ Dropbox path mapper
+- ✅ Shared link creation service
+- ✅ HTML block builder (email-safe)
+- ✅ VSTO add-in scaffolding (ThisAddIn, Ribbon)
+- ✅ Send guard with attachment checking
+- ✅ Failure recovery dialog
 
-### v1.0
-- Ribbon flow with file picker
-- OAuth 2.0 + PKCE authentication
-- Shared link creation with expiration
-- Send guard implementation
-- MSI installer
+### v1.0 (Ready for Integration Testing)
+- ⏳ Create VSTO project in Visual Studio
+- ⏳ Register Dropbox app and obtain App Key
+- ⏳ Integration testing with Team Space
+- ⏳ MSI installer with WiX
 
 ### v1.1
 - Task pane drop zone
