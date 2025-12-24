@@ -134,8 +134,12 @@ namespace Bridgewater.DropboxLinker.Core.Dropbox
             // Add path root header for team spaces
             if (!string.IsNullOrEmpty(_rootNamespaceId))
             {
-                request.Headers.Add("Dropbox-API-Path-Root", 
-                    JsonSerializer.Serialize(new { ".tag" = "root", "root" = _rootNamespaceId }));
+                var pathRoot = new System.Collections.Generic.Dictionary<string, string>
+                {
+                    { ".tag", "root" },
+                    { "root", _rootNamespaceId }
+                };
+                request.Headers.Add("Dropbox-API-Path-Root", JsonSerializer.Serialize(pathRoot));
             }
 
             var response = await _httpClient.SendAsync(request, ct);
@@ -181,8 +185,12 @@ namespace Bridgewater.DropboxLinker.Core.Dropbox
 
             if (!string.IsNullOrEmpty(_rootNamespaceId))
             {
-                request.Headers.Add("Dropbox-API-Path-Root",
-                    JsonSerializer.Serialize(new { ".tag" = "root", "root" = _rootNamespaceId }));
+                var pathRoot = new System.Collections.Generic.Dictionary<string, string>
+                {
+                    { ".tag", "root" },
+                    { "root", _rootNamespaceId }
+                };
+                request.Headers.Add("Dropbox-API-Path-Root", JsonSerializer.Serialize(pathRoot));
             }
 
             var response = await _httpClient.SendAsync(request, ct);
