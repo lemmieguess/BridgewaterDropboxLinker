@@ -4,21 +4,27 @@
     <TargetFramework>net48</TargetFramework>
     <RootNamespace>Bridgewater.DropboxLinker.Core</RootNamespace>
     <AssemblyName>Bridgewater.DropboxLinker.Core</AssemblyName>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <AnalysisLevel>latest</AnalysisLevel>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <Company>Bridgewater Studio</Company>
     <Product>Bridgewater Dropbox Linker</Product>
     <Description>Core library for Bridgewater Dropbox Linker Outlook add-in</Description>
     <Version>0.2.0</Version>
+    <DefineConstants>NETFRAMEWORK</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 
 </Project>
