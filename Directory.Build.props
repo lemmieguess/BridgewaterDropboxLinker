@@ -1,0 +1,26 @@
+<Project>
+  <PropertyGroup>
+    <!-- Common metadata -->
+    <Company>Bridgewater Studio</Company>
+    <Product>Bridgewater Dropbox Linker</Product>
+    <Copyright>Copyright © Bridgewater Studio 2025</Copyright>
+    <Authors>Bridgewater Studio</Authors>
+
+    <!-- Versioning -->
+    <VersionPrefix>0.2.0</VersionPrefix>
+    
+    <!-- Build settings -->
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    
+    <!-- Code analysis -->
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    
+    <!-- Deterministic builds -->
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+</Project>
