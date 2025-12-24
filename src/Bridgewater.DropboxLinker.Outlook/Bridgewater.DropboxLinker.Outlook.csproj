@@ -14,20 +14,17 @@
     <Product>Bridgewater Dropbox Linker</Product>
     <Description>Outlook VSTO add-in for Bridgewater Dropbox Linker</Description>
     <Version>0.2.0</Version>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <!-- 
-    NOTE: This is a placeholder project file.
+    NOTE: For production VSTO deployment, create a proper VSTO Outlook Add-in project 
+    using Visual Studio's "Outlook VSTO Add-in" template. This template provides:
+    - VSTO runtime integration
+    - ClickOnce deployment manifests
+    - Proper COM registration
     
-    For production, you should create a proper VSTO Outlook Add-in project 
-    using Visual Studio's "Outlook VSTO Add-in" template, which will generate:
-    - ThisAddIn.cs with proper VSTO lifecycle hooks
-    - Properties/AssemblyInfo.cs with VSTO attributes
-    - app.config with VSTO runtime configuration
-    - .vsto manifest file
-    
-    Then reference the Bridgewater.DropboxLinker.Core project and copy
-    the code from this project into the VSTO project structure.
+    Copy the code from this project into the generated VSTO project structure.
   -->
 
   <ItemGroup>
@@ -35,21 +32,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dropbox.Api" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- These are placeholder references. Real VSTO projects use COM references -->
+    <!-- Office Interop assemblies - these are COM references in real VSTO projects -->
     <Reference Include="Microsoft.Office.Interop.Outlook">
       <HintPath>$(ProgramFiles)\Microsoft Visual Studio\2022\Professional\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Outlook.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word">
+      <HintPath>$(ProgramFiles)\Microsoft Visual Studio\2022\Professional\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Word.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Office">
+      <HintPath>$(ProgramFiles)\Microsoft Visual Studio\2022\Professional\Visual Studio Tools for Office\PIA\Office15\Office.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Ribbon\BridgewaterRibbon.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="Ribbon\BridgewaterRibbon.xml" />
   </ItemGroup>
 
 </Project>
