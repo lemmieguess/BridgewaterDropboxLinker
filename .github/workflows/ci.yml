@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET Framework
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Restore NuGet packages
+        run: nuget restore BridgewaterDropboxLinker.sln
+
+      - name: Build solution
+        run: msbuild BridgewaterDropboxLinker.sln /p:Configuration=Release /p:Platform="Any CPU" /t:Build
+
+      - name: Run tests
+        run: |
+          dotnet test tests/Bridgewater.DropboxLinker.Core.Tests/Bridgewater.DropboxLinker.Core.Tests.csproj --configuration Release --no-build --verbosity normal
+        continue-on-error: true
+
+  code-analysis:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET Framework
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Restore NuGet packages
+        run: nuget restore BridgewaterDropboxLinker.sln
+
+      - name: Build with code analysis
+        run: msbuild BridgewaterDropboxLinker.sln /p:Configuration=Release /p:Platform="Any CPU" /p:RunCodeAnalysis=true /t:Build

@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Complete attachment size checking in SendGuard
+- Unit tests for SendGuard, LinkConversionTracker, and Configuration classes
+- New test project: Bridgewater.DropboxLinker.Outlook.Tests
+- GitHub Actions CI workflow for automated builds and code analysis
+- Pending/in-progress conversion detection in send guard
+
+### Changed
+- SendGuard now properly inspects Outlook attachments for size warnings
+- Improved error messages for multiple failed conversions
+
 ## [0.2.0] - 2024-12-24
 
 ### Added

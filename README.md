@@ -1,5 +1,7 @@
 # Bridgewater Dropbox Linker for Outlook Classic
 
+[![CI](https://github.com/lemmieguess/BridgewaterDropboxLinker/actions/workflows/ci.yml/badge.svg)](https://github.com/lemmieguess/BridgewaterDropboxLinker/actions/workflows/ci.yml)
+
 An Outlook Classic add-in that converts Dropbox files into clean, professional link blocks inserted at the cursor position.
 
 ## Overview
@@ -81,15 +83,23 @@ git clone https://github.com/lemmieguess/BridgewaterDropboxLinker.git
 cd BridgewaterDropboxLinker
 ```
 
-### 2. Create the VSTO Project
+### 2. Set Up the VSTO Project
 
-The `Bridgewater.DropboxLinker.Outlook` project is a placeholder. To create a production VSTO add-in:
+The `Bridgewater.DropboxLinker.Outlook` project contains complete production code. To enable VSTO deployment:
 
-1. In Visual Studio, create a new project: **Outlook VSTO Add-in (C#, .NET Framework)**
-2. Name it `Bridgewater.DropboxLinker.Outlook`
+1. In Visual Studio 2022, create a new project: **Outlook VSTO Add-in (C#, .NET Framework)**
+2. Name it `Bridgewater.DropboxLinker.Outlook.VSTO` (or replace the existing project)
 3. Target .NET Framework 4.8
 4. Add a project reference to `Bridgewater.DropboxLinker.Core`
-5. Copy the code from the placeholder project
+5. Copy the code files from `src/Bridgewater.DropboxLinker.Outlook/`:
+   - `ThisAddIn.cs`
+   - `BridgewaterRibbon.cs`
+   - `Configuration.cs`
+   - `Ribbon/BridgewaterRibbon.xml`
+   - `Services/SendGuard.cs`
+   - `Services/SendBlockedDialog.cs`
+   - `Services/LinkConversionTracker.cs`
+6. The VSTO template will automatically generate deployment manifests
 
 ### 3. Configure Dropbox API
 
@@ -219,7 +229,7 @@ msiexec /i BridgewaterDropboxLinker.msi /qn
 
 ### v0.2 (Current - Implemented)
 - ✅ Core utilities and contracts
-- ✅ Unit test coverage
+- ✅ Unit test coverage (Core and Outlook services)
 - ✅ OAuth 2.0 + PKCE authentication service
 - ✅ Secure token storage (Windows Credential Manager)
 - ✅ Dropbox folder locator
@@ -227,14 +237,17 @@ msiexec /i BridgewaterDropboxLinker.msi /qn
 - ✅ Shared link creation service
 - ✅ HTML block builder (email-safe)
 - ✅ VSTO add-in scaffolding (ThisAddIn, Ribbon)
-- ✅ Send guard with attachment checking
+- ✅ Send guard with full attachment size checking
 - ✅ Failure recovery dialog
+- ✅ Link conversion tracking
+- ✅ GitHub Actions CI pipeline
 
 ### v1.0 (Ready for Integration Testing)
-- ⏳ Create VSTO project in Visual Studio
+- ⏳ Create VSTO project in Visual Studio (use the code from this repo)
 - ⏳ Register Dropbox app and obtain App Key
 - ⏳ Integration testing with Team Space
 - ⏳ MSI installer with WiX
+- ⏳ Code signing
 
 ### v1.1
 - Task pane drop zone
