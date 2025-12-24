@@ -1,0 +1,9 @@
+{
+  "largeAttachmentThresholdBytes": 10485760,
+  "defaultExpirationDays": 7,
+  "blockLabel": "Dropbox link",
+  "primaryActionText": "Open",
+  "insertBlankLineBetweenBlocks": true,
+  "enableTaskPaneDropZone": true,
+  "debugLogPaths": false
+}
