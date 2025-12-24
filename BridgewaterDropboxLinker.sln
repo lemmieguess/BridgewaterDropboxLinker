@@ -1,0 +1,44 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridgewater.DropboxLinker.Core", "src\Bridgewater.DropboxLinker.Core\Bridgewater.DropboxLinker.Core.csproj", "{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridgewater.DropboxLinker.Outlook", "src\Bridgewater.DropboxLinker.Outlook\Bridgewater.DropboxLinker.Outlook.csproj", "{B2C3D4E5-F6A7-4890-BCDE-F01234567890}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridgewater.DropboxLinker.Core.Tests", "tests\Bridgewater.DropboxLinker.Core.Tests\Bridgewater.DropboxLinker.Core.Tests.csproj", "{C3D4E5F6-A7B8-4901-CDEF-012345678901}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D4E5F6A7-B8C9-4012-DEF0-123456789012}"
+	ProjectSection(SolutionItems) = preProject
+		docs\00-one-pager.md = docs\00-one-pager.md
+		docs\01-product-spec-v0.2.md = docs\01-product-spec-v0.2.md
+		docs\02-developer-handoff-v0.2.md = docs\02-developer-handoff-v0.2.md
+		docs\03-ux-html-block.md = docs\03-ux-html-block.md
+		docs\04-templates.md = docs\04-templates.md
+		docs\05-best-practices.md = docs\05-best-practices.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C3D4E5-F6A7-4890-BCDE-F01234567890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C3D4E5-F6A7-4890-BCDE-F01234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C3D4E5-F6A7-4890-BCDE-F01234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C3D4E5-F6A7-4890-BCDE-F01234567890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3D4E5F6-A7B8-4901-CDEF-012345678901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3D4E5F6-A7B8-4901-CDEF-012345678901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3D4E5F6-A7B8-4901-CDEF-012345678901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3D4E5F6-A7B8-4901-CDEF-012345678901}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
